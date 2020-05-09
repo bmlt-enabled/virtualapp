@@ -1,16 +1,18 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, Linking, TouchableOpacity} from 'react-native';
 
 function DetailsView(props) {
   const {route, navigation} = props;
   const {item} = route.params;
-  const {meeting_name, start_time, virtual_meeting_link} = item;
+  const {meeting_name, start_time, comments} = item;
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{meeting_name}</Text>
+      <Text style={styles.text}>{start_time}</Text>
       <View style={styles.card}>
-        <Text style={styles.cardText}>Start Time: {start_time}</Text>
-        <Text style={styles.cardText}>{virtual_meeting_link}</Text>
+        <TouchableOpacity onPress={() => Linking.openURL(comments)}>
+          <Text style={styles.cardText}>{comments}</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
