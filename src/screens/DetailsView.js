@@ -15,9 +15,15 @@ function DetailsView(props) {
   const {meeting_name, start_time, comments} = item;
   const onShare = async () => {
     try {
-      const result = await Share.share({
-        message: 'Share Meeting',
-      });
+      const result = await Share.share(
+        {
+          message: comments,
+          title: 'Virtual Meeting Shared',
+        },
+        {
+          subject: 'Virtual Meeting Shared',
+        },
+      );
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
           // shared with activity type of result.activityType

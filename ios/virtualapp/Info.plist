@@ -37,9 +37,9 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Your location is used to determine which timezone to display meetings in.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your location is used to determine which timezone to display meetings in.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Your location is used to determine which timezone to display meetings in.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location is used to determine which timezone to display meetings in.</string>
