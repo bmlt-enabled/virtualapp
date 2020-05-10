@@ -10,7 +10,7 @@ function DetailsList(props) {
 
   useEffect(() => {
     fetch(
-      'https://vphone.bmltenabled.org/api/getMeetings.php?results_count=5&suppress_voice_results=false&latitude=35.5648713&longitude=-78.6682395',
+      'https://vphone.bmltenabled.org/api/getMeetings.php?results_count=100&suppress_voice_results=false&latitude=35.5648713&longitude=-78.6682395',
     )
       .then((response) => {
         return response.json();
@@ -34,7 +34,6 @@ function DetailsList(props) {
               subtitle={item.start_time}
               bottomDivider
               onPress={() => {
-                console.log('onPress: ' + item.meeting_name);
                 navigation.navigate('DetailsView', {item: item});
               }}
             />
