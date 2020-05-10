@@ -10,6 +10,7 @@ function DetailsList(props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    Geolocation.requestAuthorization();
     Geolocation.getCurrentPosition(
       (position) => {
         let currentLongitude = JSON.stringify(position.coords.longitude);

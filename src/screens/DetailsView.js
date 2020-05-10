@@ -1,10 +1,37 @@
 import React from 'react';
-import {StyleSheet, View, Text, Linking, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Linking,
+  TouchableOpacity,
+  Share,
+  Button,
+} from 'react-native';
 
 function DetailsView(props) {
   const {route, navigation} = props;
   const {item} = route.params;
   const {meeting_name, start_time, comments} = item;
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: 'Share Meeting',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{meeting_name}</Text>
@@ -14,6 +41,7 @@ function DetailsView(props) {
           <Text style={styles.cardText}>{comments}</Text>
         </TouchableOpacity>
       </View>
+      <Button onPress={onShare} title="Share" />
     </View>
   );
 }
