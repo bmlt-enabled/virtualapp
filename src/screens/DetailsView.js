@@ -10,9 +10,9 @@ import {
 } from 'react-native';
 
 function DetailsView(props) {
-  const {route, navigation} = props;
+  const {route} = props;
   const {item} = route.params;
-  const {meeting_name, start_time, comments} = item;
+  const {meeting_name, start_time, comments, location_info} = item;
   const onShare = async () => {
     try {
       const result = await Share.share(
@@ -42,12 +42,13 @@ function DetailsView(props) {
     <View style={styles.container}>
       <Text style={styles.text}>{meeting_name}</Text>
       <Text style={styles.text}>{start_time}</Text>
-      <View style={styles.card}>
-        <TouchableOpacity onPress={() => Linking.openURL(comments)}>
-          <Text style={styles.cardText}>{comments}</Text>
-        </TouchableOpacity>
-      </View>
-      <Button onPress={onShare} title="Share" />
+      <TouchableOpacity onPress={() => Linking.openURL(comments)}>
+        <View style={styles.buttonContainer}>
+          <Text style={styles.textLink}>{comments}</Text>
+        </View>
+      </TouchableOpacity>
+      <Text>{location_info}</Text>
+      <Button style={styles.shareButton} onPress={onShare} title="Share" />
     </View>
   );
 }
@@ -64,6 +65,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
+  textLink: {
+    color: '#000',
+    fontSize: 18,
+  },
   card: {
     width: 350,
     height: 100,
@@ -73,20 +78,18 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
   },
-  cardText: {
-    fontSize: 18,
-    color: '#ffd700',
-    marginBottom: 5,
-  },
   buttonContainer: {
-    backgroundColor: '#222',
+    backgroundColor: '#AAA',
     borderRadius: 5,
-    padding: 10,
+    padding: 30,
     margin: 20,
   },
   buttonText: {
     fontSize: 20,
     color: '#fff',
+  },
+  shareButton: {
+    margin: 30,
   },
 });
 
