@@ -2,6 +2,7 @@ import React, {Component, useEffect, useState} from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Geolocation from '@react-native-community/geolocation';
 
 function DetailsList(props) {
   const {navigation} = props;
@@ -9,17 +10,26 @@ function DetailsList(props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch(
-      'https://vphone.bmltenabled.org/api/getMeetings.php?results_count=100&suppress_voice_results=false&latitude=35.5648713&longitude=-78.6682395',
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setData(data.filteredList);
-      })
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
+    Geolocation.getCurrentPosition(
+      (position) => {
+        let currentLongitude = JSON.stringify(position.coords.longitude);
+        let currentLatitude = JSON.stringify(position.coords.latitude);
+
+        fetch(
+          `https://vphone.bmltenabled.org/api/getMeetings.php?results_count=100&suppress_voice_results=false&latitude=${currentLatitude}&longitude=${currentLongitude}`,
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            setData(data.filteredList);
+          })
+          .catch((error) => console.error(error))
+          .finally(() => setLoading(false));
+      },
+      (error) => alert(error.message),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+    );
   }, []);
 
   return (

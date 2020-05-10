@@ -93,12 +93,3 @@ target 'virtualapp' do
     flipper_post_install(installer)
   end
 end
-
-target 'virtualapp-tvOS' do
-  # Pods for virtualapp-tvOS
-
-  target 'virtualapp-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-end

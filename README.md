@@ -2,7 +2,6 @@
 
 TODO:
 
-1) Use device location for TZ conversions (right now hardcoded to Eastern Timezone)
-2) Migrate to expo?
-3) Android testing
-4) Migrate to Fastlane https://dev-yakuza.github.io/en/react-native/fastlane/
+1) Migrate to expo?
+2) Android testing
+3) Migrate to Fastlane https://dev-yakuza.github.io/en/react-native/fastlane/
