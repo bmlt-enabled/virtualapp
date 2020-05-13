@@ -81,6 +81,7 @@ function DetailsList(props) {
               onPress={() => {
                 navigation.navigate('DetailsView', {item: item});
               }}
+              chevron
             />
           );
         }}
