@@ -1,35 +1,27 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import DetailsList from '../screens/DetailsList';
-import DetailsView from '../screens/DetailsView';
+import Meetings from '../navigation/MeetingStackNavigator';
+import About from '../screens/About';
 
-const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function MainStackNavigator() {
+function MainTabNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="DetailsList"
+      <Tab.Navigator
+        initialRouteName="Meetings"
         screenOptions={{gestureEnabled: true}}>
-        <Stack.Screen
-          name="DetailsList"
-          component={DetailsList}
-          options={{title: 'Virtual NA Meetings'}}
+        <Tab.Screen
+          name="Meetings"
+          component={Meetings}
+          options={{title: 'Meetings'}}
         />
-        <Stack.Screen
-          name="DetailsView"
-          component={DetailsView}
-          options={({route}) => ({
-            title: 'Meeting Details',
-          })}
-        />
-      </Stack.Navigator>
+        <Tab.Screen name="About" component={About} options={{title: 'About'}} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
 
-export default MainStackNavigator;
+export default MainTabNavigator;
