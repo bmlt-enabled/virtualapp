@@ -33,7 +33,7 @@
 		00E356F21AD99517003FC87E /* virtualappTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = virtualappTests.m; sourceTree = "<group>"; };
 		045B35B9C245504ACA003B1F /* libPods-virtualapp-virtualappTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-virtualapp-virtualappTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		126584DD900B6F74A6C2CEA2 /* Pods-virtualapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-virtualapp.release.xcconfig"; path = "Target Support Files/Pods-virtualapp/Pods-virtualapp.release.xcconfig"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* NA Virtual Meetings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NA Virtual Meetings.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Virtual NA Meetings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual NA Meetings.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = virtualapp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = virtualapp/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -199,7 +199,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* NA Virtual Meetings.app */,
+				13B07F961A680F5B00A75B9A /* Virtual NA Meetings.app */,
 				00E356EE1AD99517003FC87E /* virtualappTests.xctest */,
 			);
 			name = Products;
@@ -246,7 +246,7 @@
 			);
 			name = virtualapp;
 			productName = virtualapp;
-			productReference = 13B07F961A680F5B00A75B9A /* NA Virtual Meetings.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Virtual NA Meetings.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -574,7 +574,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = W3VPL2AWZJ;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -590,7 +590,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.bmltenabled.virtualapp;
-				PRODUCT_NAME = "NA Virtual Meetings";
+				PRODUCT_NAME = "Virtual NA Meetings";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -604,7 +604,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = ZT5C36Q3DY;
 				INFOPLIST_FILE = virtualapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -615,7 +615,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.bmltenabled.navirtualmeetings;
-				PRODUCT_NAME = "NA Virtual Meetings";
+				PRODUCT_NAME = "Virtual NA Meetings";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";

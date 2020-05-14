@@ -1,10 +1,15 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Linking} from 'react-native';
 
 function About() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Brought you by ....</Text>
+      <Text style={styles.text}>Brought to you by (TBD)</Text>
+      <Text
+        style={styles.websiteLink}
+        onPress={() => Linking.openURL('https://example.org')}>
+        https://example.org
+      </Text>
     </View>
   );
 }
@@ -21,8 +26,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
-  textLink: {
-    color: '#000',
+  websiteLink: {
+    color: 'blue',
     fontSize: 18,
   },
   card: {

@@ -67,25 +67,38 @@ function DetailsList(props) {
     );
   };
 
+  const weekdays = [
+    '',
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+
   return (
     <View style={styles.container}>
       <FlatList
         data={data}
+        keyExtractor={(item) => item.id_bigint}
         renderItem={({item}) => {
-          console.log(item.meeting_name);
           return (
             <ListItem
               title={item.meeting_name}
-              subtitle={item.start_time}
+              subtitle={`${weekdays[item.weekday_tinyint]} ${item.start_time}`}
               bottomDivider
               onPress={() => {
-                navigation.navigate('DetailsView', {item: item});
+                navigation.navigate('DetailsView', {
+                  item: item,
+                  weekday: weekdays[item.weekday_tinyint],
+                });
               }}
               chevron
             />
           );
         }}
-        keyExtractor={(item) => item.id_bigint}
       />
     </View>
   );
