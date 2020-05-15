@@ -19,7 +19,9 @@ function DetailsView(props) {
     try {
       const result = await Share.share(
         {
-          message: `${meeting_name}\n${weekday} ${start_time}\n${comments}\n${location_info}`,
+          message: `${meeting_name}\n${weekday} ${start_time}\n${comments}${
+            location_info.length > 0 ? '\n' + location_info : ''
+          }`,
           title: 'Virtual Meeting Shared',
         },
         {
@@ -54,7 +56,9 @@ function DetailsView(props) {
       <TouchableOpacity
         onPress={() =>
           Clipboard.setString(
-            `${meeting_name}\n${weekday} ${start_time}\n${comments}\n${location_info}`,
+            `${meeting_name}\n${weekday} ${start_time}\n${comments}${
+              location_info.length > 0 ? '\n' + location_info : ''
+            }`,
           )
         }>
         <FontAwesome5Icon name="copy" style={styles.copyIcon} size={24} />
