@@ -1,14 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  PermissionsAndroid,
-  Platform,
-} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import Geolocation from '@react-native-community/geolocation';
 
 function DetailsList(props) {
   const {navigation} = props;
@@ -17,55 +10,19 @@ function DetailsList(props) {
   let that = this;
 
   useEffect(() => {
-    if (Platform.OS === 'ios') {
-      Geolocation.requestAuthorization();
-      getLocation(that);
-    } else {
-      async function requestLocationPermission() {
-        try {
-          const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-            {
-              title: 'Location Access Required',
-              message: 'This App needs to Access your location',
-            },
-          );
-          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            getLocation(that);
-          } else {
-            alert('Permission Denied');
-          }
-        } catch (err) {
-          alert('err', err);
-          console.warn(err);
-        }
-      }
-      requestLocationPermission();
-    }
+    let timezone_id = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    let url = `https://vphone.bmltenabled.org/api/getMeetings.php?results_count=100&suppress_voice_results=false&latitude=0&longitude=0&timezone_id=${timezone_id}`;
+    console.log(url);
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((res) => {
+        setData(res.filteredList);
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
   }, [that]);
-
-  const getLocation = (that) => {
-    Geolocation.getCurrentPosition(
-      (position) => {
-        let currentLongitude = JSON.stringify(position.coords.longitude);
-        let currentLatitude = JSON.stringify(position.coords.latitude);
-
-        fetch(
-          `https://vphone.bmltenabled.org/api/getMeetings.php?results_count=100&suppress_voice_results=false&latitude=${currentLatitude}&longitude=${currentLongitude}`,
-        )
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            setData(data.filteredList);
-          })
-          .catch((error) => console.error(error))
-          .finally(() => setLoading(false));
-      },
-      (error) => alert(error.message),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-    );
-  };
 
   const weekdays = [
     '',
