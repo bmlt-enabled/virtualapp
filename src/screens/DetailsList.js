@@ -1,15 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, FlatList} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  RefreshControl,
+  ScrollView,
+} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 function DetailsList(props) {
   const {navigation} = props;
-  const [isLoading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   let that = this;
 
-  useEffect(() => {
+  const getData = () => {
+    setLoading(true);
+    setRefreshing(true);
     let timezone_id = Intl.DateTimeFormat().resolvedOptions().timeZone;
     let url = `https://vphone.bmltenabled.org/api/getMeetings.php?results_count=100&suppress_voice_results=false&latitude=0&longitude=0&timezone_id=${timezone_id}`;
     console.log(url);
@@ -21,7 +30,18 @@ function DetailsList(props) {
         setData(res.filteredList);
       })
       .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+        setRefreshing(false);
+      });
+  };
+
+  const onRefresh = () => {
+    getData();
+  };
+
+  useEffect(() => {
+    getData(setLoading, setData);
   }, [that]);
 
   const weekdays = [
@@ -36,28 +56,29 @@ function DetailsList(props) {
   ];
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id_bigint}
-        renderItem={({item}) => {
-          return (
-            <ListItem
-              title={item.meeting_name}
-              subtitle={`${weekdays[item.weekday_tinyint]} ${item.start_time}`}
-              bottomDivider
-              onPress={() => {
-                navigation.navigate('DetailsView', {
-                  item: item,
-                  weekday: weekdays[item.weekday_tinyint],
-                });
-              }}
-              chevron
-            />
-          );
-        }}
-      />
-    </View>
+    <FlatList
+      data={data}
+      keyExtractor={(item) => item.id_bigint}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+      renderItem={({item}) => {
+        return (
+          <ListItem
+            title={item.meeting_name}
+            subtitle={`${weekdays[item.weekday_tinyint]} ${item.start_time}`}
+            bottomDivider
+            onPress={() => {
+              navigation.navigate('DetailsView', {
+                item: item,
+                weekday: weekdays[item.weekday_tinyint],
+              });
+            }}
+            chevron
+          />
+        );
+      }}
+    />
   );
 }
 
