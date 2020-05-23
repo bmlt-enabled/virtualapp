@@ -7,7 +7,6 @@ TODO:
 3) Migrate to Fastlane https://dev-yakuza.github.io/en/react-native/fastlane/
 4) Add favorites menu
 5) Push notifications for favorites
-6) Switch to using timezone detection versus location.
 
 To release android, add to android/local.properties
 
